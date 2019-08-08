@@ -7,16 +7,16 @@
 int main() {
 	Product A{ "ÇØÃÊ ¸»¸²", Color::Green, Size::Small };
 	Product B{ "ºÓÀº ¸Á°í", Color::Red, Size::Large };
-	Product C{ "³ì»ö µþ±â", Color::Red, Size::Small };
+	Product C{ "ºÓÀº µþ±â", Color::Red, Size::Small };
 
 	Items<Product*> items{ &A, &B, &C };
 
-	ColorSpecification<Product> color_spec(Color::Red);
-	SizeSpecification<Product> size_spec(Size::Medium);
-
-	SpecificationFilter<Product> specification_filter;
-
-	auto new_items = specification_filter.filter(items, color_spec && size_spec);
+	using color_spec = ColorSpecification<Product>;
+	using size_spec = SizeSpecification<Product>;
+	SpecificationFilter<Product> fil;
+	
+	auto spec = color_spec(Color::Red) && size_spec(Size::Large);
+	auto new_items = fil.filter(items, spec);
 
 	printf("Total of large specification things is %d\n", new_items.size());
 }

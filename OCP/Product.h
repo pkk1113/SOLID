@@ -3,13 +3,13 @@
 
 using Name = std::string;
 
-enum Color {
+enum class Color : int {
 	Red,
 	Green,
 	Blue,
 };
 
-enum Size {
+enum class Size : int {
 	Small,
 	Medium,
 	Large,
