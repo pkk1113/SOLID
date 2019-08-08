@@ -11,13 +11,13 @@ int main() {
 
 	Items<Product*> items{ &A, &B, &C };
 
-	using color_spec = ColorSpecification<Product>;
-	using size_spec = SizeSpecification<Product>;
-	SpecificationFilter<Product> fil;
-	
-	auto spec = color_spec(Color::Red) && size_spec(Size::Large);
-	auto new_items = fil.filter(items, spec);
+	auto color_spec = ColorSpecification<Product>(Color::Red);
+	auto size_spec = SizeSpecification<Product>(Size::Large);
 
-	printf("Total of large specification things is %d\n", new_items.size());
+	auto spec_filter = SpecificationFilter<Product>();
+	auto new_items = spec_filter.filter(items, color_spec && size_spec);
+
+	printf("필터된 아이템 목록의 크기: %d\n",
+		   new_items.size());
 }
 
